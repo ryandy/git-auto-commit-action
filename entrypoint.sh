@@ -2,6 +2,12 @@
 
 set -eu
 
+# Prevent wildcard expansion from occurring in the shell. This is particularly
+# important when dealing with INPUT_FILE_PATTERN, which may include wildcard
+# characters. We don't want the shell to glob expand the patterns before they're
+# passed to git status/add, so turn on "noglob" for this script.
+set -o noglob
+
 _main() {
     _switch_to_repository
 
